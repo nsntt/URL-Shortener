@@ -5,13 +5,13 @@ import { Router } from "express";
 
 const router = Router();
 
-router.route('/url')
+router.route('/')
     .post([AuthMiddlewares.isLoggedIn, UrlMiddlewares.isValidUrl, UrlMiddlewares.limitedUrl], UrlController.createUrl)
 
-router.route('/url/:urlId')
-    .get([UrlMiddlewares.urlExist], UrlController.getUrl)
-    .delete([AuthMiddlewares.isLoggedIn, UrlMiddlewares.urlExist, UrlMiddlewares.isMyUrl], UrlController.deleteUrl)
-    .put([AuthMiddlewares.isLoggedIn, UrlMiddlewares.urlExist, UrlMiddlewares.isMyUrl, UrlMiddlewares.isValidUrl], UrlController.editUrl)
+router.route('/:personalizedLink')
+    .get([UrlMiddlewares.urlExist, UrlMiddlewares.isDeleted], UrlController.getUrl)
+    .delete([AuthMiddlewares.isLoggedIn, UrlMiddlewares.urlExist, UrlMiddlewares.isMyUrl, UrlMiddlewares.isDeleted], UrlController.deleteUrl)
+    .put([AuthMiddlewares.isLoggedIn, UrlMiddlewares.urlExist, UrlMiddlewares.isMyUrl, UrlMiddlewares.isValidUrl, UrlMiddlewares.isDeleted], UrlController.editUrl)
 
 
 export default router;

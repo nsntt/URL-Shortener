@@ -22,5 +22,14 @@ export const userSchema = new mongoose.Schema({
     urls: [{
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Url'
-    }]
+    }],
+    banned: {
+        type: mongoose.SchemaTypes.Boolean,
+        default: false
+    },
+    deleted: {
+        type: mongoose.SchemaTypes.Boolean,
+        default: false
+    },
+    date: mongoose.SchemaTypes.Date
 });
